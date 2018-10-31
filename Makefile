@@ -10,13 +10,11 @@ KDIR := ~/linux_kernel
 
 PWD := $(shell pwd)
 
-
-
 default:
 	make ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KDIR) M=$(PWD) modules
-	$(CROSS_COMPILE)-gcc main.c -o $(OUTPUT)
+	@$(CROSS_COMPILE)gcc main.c -o $(OUTPUT)
 clean:
-	@rm *.ko *.mod.c *.mod.o Module.symvers modules.order
+	@rm *.ko *.mod.c *.o Module.symvers modules.order $(OUTPUT)
 install:
 	@scp $(OUTPUT).ko $(OUTPUT)  udooer@$(TARGET_IP):~	
 
